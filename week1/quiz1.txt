@@ -1,0 +1,56 @@
+Question 1
+Social network connectivity. Given a social network containing nn members and a log file containing mm timestamps at which times pairs of members formed friendships, design an algorithm to determine the earliest time at which all members are connected (i.e., every member is a friend of a friend of a friend ... of a friend). Assume that the log file is sorted by timestamp and that friendship is an equivalence relation. The running time of your algorithm should be m \log nmlogn or better and use extra space proportional to nn.
+
+Note: these interview questions are ungraded and purely for your own enrichment. To get a hint, submit a solution.
+
+Answer:
+WQU - weighted quick union algorithm
+QUPC - quick union path compressed algorithm
+WQUPC - weighted quick union path compressed algorithm
+Ok, it's good example where we can use WQU algoritm (or QUPC/WQUPC).
+Each friendship in log file like union operation between p-user and q-user from total n users our network.
+So, how we can solve tihs problem?
+I our case we must find timestamp when all members are connected. In language our algorithm it's mean all members in one tree and have same root of this tree.
+Our solution will be:
+1. Use WQUPC
+2. Create class in construct will be n nodes (each node - user from network)
+3. Gel all logs from file and each log - union operation. So each iteration we will union operation between p-user and q-user
+4. In this iteration we will check root node of all connection. If root same for all - break our loop. It's mean we found out timestamp.
+
+
+Question 2
+Union-find with specific canonical element. Add a method \mathtt{find()}find() to the union-find data type so that \mathtt{find(i)}find(i) returns the largest element in the connected component containing ii. The operations, \mathtt{union()}union(), \mathtt{connected()}connected(), and \mathtt{find()}find() should all take logarithmic time or better.
+
+For example, if one of the connected components is \{1, 2, 6, 9\}{1,2,6,9}, then the \mathtt{find()}find() method should return 99 for each of the four elements in the connected components.
+
+Answer:
+Each element of our components (or set if we use mathematics language) have same root. It's mean if we have k objects {a1, a2, ..., ak} the root will be same ids[a1] = ids[a2] = ... = ids[ak]
+So, in find we can do (find(i))
+1. Get root of element i (for example it will be N):
+2. Get set of all elements with same root (N)
+3. Get max element from this set.
+
+
+Question 3
+Successor with delete. Given a set of nn integers  S = \{ 0, 1, ... , n-1 \}S={0,1,...,n−1} and a sequence of requests of the following form:
+Remove xx from SS
+Find the successor of xx: the smallest yy in SS such that y \ge xy≥x.
+design a data type so that all operations (except construction)  take logarithmic time or better in the worst case.
+
+Answer:
+For this case we also can use  WQU algoritm (or QUPC/WQUPC).
+In our basic WQU we already have construct which init nodes and operations union and connected.
+So fo this case we can a little modify WQU logic class.
+We need to add condition in union method and add new method find(i) like in question2.
+Each operation from sequence have 2 parts:
+1) Remove x from S 
+2) Find the successor of x: the smallest y in S such that y ≥x. 
+Steps:
+1. When we remove x from S  we init in construct nodes from set S without x
+2. In union operation we in loop check if x cmaller or equal element from S we do union (create tree)
+3. In method find (i) we get minimum element from our tree
+What about cost (the worst way)?
+1. - N (we not check it in this task)
+2. - logN
+3. - 1 (we can do union with sort so we always will know we are the smallest element)
+The wors time will be logN

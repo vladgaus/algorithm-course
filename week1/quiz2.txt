@@ -1,0 +1,77 @@
+Question 1
+3-SUM in quadratic time. Design an algorithm for the 3-SUM problem that takes time proportional to n^2n in the worst case. You may assume that you can sort the n integers in time proportional to n^2n or better.
+
+Note: these interview questions are ungraded and purely for your own enrichment. To get a hint, submit a solution.
+
+Answer:
+We can use for this case binary search algorithm. Let's say we must find a1 + a2 + a3 = 0 from N set.
+It's same if we start to find a1 equal -(a2 + a3) = K 
+First we will sort all data (and it will take ~ n^2 time). Next we will use binary search. Get middle of numbers. If K more than middle go to the right middle.
+If less - go to the left middle etc.
+This search time ~ log(n).
+So our solution will be in time ~ n^2 * log(n). In it's proportional to n^2 or better.
+
+Question 2
+Search in a bitonic array. An array is bitonic if it is comprised of an increasing sequence of integers followed immediately by a decreasing sequence of integers. Write a program that, given a bitonic array of nn distinct integer values, determines whether a given integer is in the array.
+ - Standard version: Use ~ 3*lg(n) compares in the worst case.
+ - Standard version: Use ~ 2*lg(n) compares in the worst case (and prove that no algorithm can guarantee to perform fewer than ~ 2*lg(n) compares in the worst case).
+ 
+ Answer:
+Ok, we have array with 2 sequences (increasing  and decreasing). And these 2 sequences go one by one.
+And we know that we can find any number from sorterd array in ~lg(n) if we will use binary search algorithm.
+So what need to do?
+Need to find bounds between sequences and search in each.
+Pseudocode will be like this:
+
+findInBitonicArray(n){
+    // find bound
+    N - our bitonic array
+    k = min(N);
+    incArray = [];
+    decrArray = [];
+    for (i = 1; i <= count(N); i++) {
+        if (k <= i) {
+            k = i;
+            incArray[] = i;
+        } else {
+            decrArray = [];
+        }
+    }
+   // now we have 2 sorted arrays: increasing  (incArray) and  decreasing (decrArray).
+   // for each we can set binary search
+}
+Total time will be ~ N + lgN + lgN ~ 2lgN
+
+Question 3
+Egg drop. Suppose that you have an n-story building (with floors 1 through n) and plenty of eggs. An egg breaks if it is dropped from floor T or higher and does not break otherwise. Your goal is to devise a strategy to determine the value of T given the following limitations on the number of eggs and tosses:
+ - Version 0: 1 egg, ≤T tosses
+ - Version 1: 1 lg(n)eggs and  lg(n) tosses
+ - Version 2: lgT eggs ~ 2lgT tosses
+ - Version 3: 2 eggs and 2*n^0.5 tosses
+ - Version 4: 2 eggs and c*T^0.5 tosses
+ 
+ Answer: 
+Each version looks like tilda notation time of algorithm and we have some counts to find this algorithm and prove hypothesis.
+So let's think about each point:
+1) 1 egg and <= T tosses.
+We have only 1 egg and only one try. We can check our hypothesis in T tosses.
+2) lg(n) eggs and  lg(n) tosses
+Same count of eggs and tosses. We can check a few random between 1 and N and check hypothesis. So we will find T
+3) lgT eggs ~ 2lgT tosses
+Eggs 2 times less than tosses. We can chek only odd tosses for example or only (or only even). It will help us to find T.
+4) 2 eggs and 2*n^0.5 tosses
+If we will get log from both side it will be like
+lg2 eggs and lgn.
+Our tosses already sorted so we can try ti use binary search in this case.
+2 eggs and c*T^0.5 tosses
+Same - get logs from both sides and we will get
+lg2 eggs and (c/2) * lgn. (or ~ constant * ln(n))
+Also we can use binary search for this case. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

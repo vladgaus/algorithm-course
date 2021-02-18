@@ -1,0 +1,28 @@
+Question 1
+Queue with two stacks. Implement a queue with two stacks so that each queue operations takes a constant amortized number of stack operations.
+
+Answer:
+For Queue we have 2 main operations:
+1) dequeue (remove and return first one).
+2) enqueue (add new one)
+If our queue are 2 stack we can reverse 1 stack.
+So enqueue will be push in 1-st reversed stack and dequeue will be push from 2-nd stack.
+All operations takes a constant amortized number of stack operations.
+
+Question 2
+Stack with max. Create a data structure that efficiently supports the stack operations (push and pop) and also a return-the-maximum operation.
+Assume the elements are real numbers so that you can compare them.
+
+Answer:
+For this case we need to change only push operation.
+When we push number we add condition. If pushed number less then last number we go push to prev index stack number. And same iteration repeat. If some number in stack less or equal then pushed number - we do standart push operation.
+So we have sorted stack and max will be last element.
+
+Question 3
+Java generics. Explain why Java prohibits generic array creation.
+
+Answer:
+The main reason: arrays are covariant and generics are invariant.
+Covariant: It means you can assign subclass type array to its superclass array reference.
+Invariant: It means you cannot assign subclass type generic to its super class generic reference because in generics any
+two distinct types are neither a subtype nor a supertype.
